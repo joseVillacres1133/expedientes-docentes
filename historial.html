@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Historial de Ediciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Historial de Documentos</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr><th>Sección</th><th>Categoría</th><th>Archivo</th><th>Acción</th><th>Fecha</th></tr>
+    </thead>
+    <tbody id="tablaHistorial"></tbody>
+  </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$.getJSON('https://expedientesdocentes.infinityfreeapp.com/historial_ediciones.php?usuario_id=1', function(data) {
+  let rows = '';
+  data.forEach(item => {
+    rows += `<tr>
+      <td>${item.seccion}</td>
+      <td>${item.categoria}</td>
+      <td>${item.archivo_nombre}</td>
+      <td>${item.accion || '-'}</td>
+      <td>${item.fecha || '-'}</td>
+    </tr>`;
+  });
+  $('#tablaHistorial').html(rows);
+});
+</script>
+</body>
+</html>
